@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Mom Is NOT Cool</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', sans-serif;
+            background-color: #121212;
+            color: #eaeaea;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: #ff5252;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 3px 3px 0 #990000;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+        
+        .jokes-container {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .joke {
+            background-color: #2a2a2a;
+            border-left: 4px solid #ff5252;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 5px 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .joke:hover {
+            transform: translateX(5px);
+            background-color: #333333;
+        }
+        
+        .btn {
+            background-color: #ff5252;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            display: block;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            background-color: #ff3232;
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>YOUR MOM IS NOT COOL</h1>
+        <div class="subtitle">Maybe she is?</div>
+    </header>
+    
+    <div class="container">
+        <div class="jokes-container">
+            <div class="joke" id="joke1">Your mom is so cool, the temperature drops 10 degrees when she enters a room.</div>
+            <div class="joke" id="joke2">Your mom is so bad at technology, she thought Bluetooth was a rare dental condition.</div>
+            <div class="joke" id="joke3">Your mom is so old, her first job was as a babysitter for dinosaurs.</div>
+            <div class="joke" id="joke4">Your mom is so disorganized, she got lost in a one-room apartment.</div>
+            <div class="joke" id="joke5">Your mom is so literal, when someone told her to "go with the flow" she jumped into a river.</div>
+            <div class="joke" id="joke6">Your mom is so unphotogenic, cameras automatically switch to selfie mode to avoid taking her picture.</div>
+            <div class="joke" id="joke7">Your mom is so predictable, even fortune tellers tell her what she did yesterday.</div>
+            <div class="joke" id="joke8">Your mom is so unfunny, her jokes need laugh tracks in real life.</div>
+        </div>
+        
+        <button class="btn" id="new-joke-btn">SHOW ME ANOTHER JOKE</button>
+    </div>
+    
+    <footer>
+        Your mom might be cool but priyanshu.is-not.cool
+    </footer>
+    
+    <script>
+        const jokes = [
+            "Your mom is so cool, the temperature drops 10 degrees when she enters a room.",
+            "Your mom is so bad at technology, she thought Bluetooth was a rare dental condition.",
+            "Your mom is so old, her first job was as a babysitter for dinosaurs.",
+            "Your mom is so disorganized, she got lost in a one-room apartment.",
+            "Your mom is so literal, when someone told her to 'go with the flow' she jumped into a river.",
+            "Your mom is so unphotogenic, cameras automatically switch to selfie mode to avoid taking her picture.",
+            "Your mom is so predictable, even fortune tellers tell her what she did yesterday.",
+            "Your mom is so unfunny, her jokes need laugh tracks in real life.",
+            "Your mom is so out of touch, she thinks TikTok is the sound a clock makes.",
+            "Your mom is so unmotivated, she puts the 'pro' in 'procrastination'.",
+            "Your mom is so clumsy, she tripped on a wireless network.",
+            "Your mom is so unconvincing, she couldn't sell water to someone in a desert.",
+            "Your mom is so directionally challenged, she needs GPS to find her way out of bed.",
+            "Your mom is so unoriginal, she plagiarizes her own thoughts.",
+            "Your mom is so awkward, even social distancing guidelines feel too close for comfort.",
+            "Your mom is so unfashionable, she's the reason thrift stores have donation bins.",
+            "Your mom is so indecisive, she takes 30 minutes to choose a flavor at an ice cream shop with only vanilla and chocolate.",
+            "Your mom is so forgetful, she leaves sticky notes to remind herself to write sticky notes.",
+            "Your mom is so slow, her internet explorer actually caught up and retired before she did.",
+            "Your mom is so uncreative, her imagination needs software updates."
+        ];
+
+        let currentJokes = jokes.slice(0, 8);
+        let displayedIndexes = [0, 1, 2, 3, 4, 5, 6, 7];
+        
+        document.getElementById('new-joke-btn').addEventListener('click', function() {
+            const jokeElements = document.querySelectorAll('.joke');
+            
+            const availableJokes = jokes.filter((joke, index) => !displayedIndexes.includes(index));
+            
+            if (availableJokes.length >= jokeElements.length) {
+                displayedIndexes = [];
+                for (let i = 0; i < jokeElements.length; i++) {
+                    let randomIndex = Math.floor(Math.random() * availableJokes.length);
+                    let jokeIndex = jokes.indexOf(availableJokes[randomIndex]);
+                    
+                    jokeElements[i].textContent = availableJokes[randomIndex];
+                    displayedIndexes.push(jokeIndex);
+                    
+                    availableJokes.splice(randomIndex, 1);
+                }
+            } else {
+                displayedIndexes = [0, 1, 2, 3, 4, 5, 6, 7];
+                for (let i = 0; i < jokeElements.length; i++) {
+                    jokeElements[i].textContent = jokes[displayedIndexes[i]];
+                }
+            }
+        });
+    </script>
+</body>
+</html>
